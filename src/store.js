@@ -51,7 +51,8 @@ class Store {
     this.setState({
       items: this.state.items.concat({
         code,
-        title: 'Новая запись №'+code
+        title: 'Новая запись №'+code,
+        clickCount: 0
       })
     });
   }
@@ -79,6 +80,18 @@ class Store {
         return item;
       })
     });
+  }
+
+  // Счетчик выделений записи
+  countSelectedItem(code) {
+    this.setState({
+      items: this.state.items.map(item => {
+        if (item.code === code && item.selected) {
+          item.clickCount ++
+        }
+        return item;
+      })
+    })
   }
 }
 
